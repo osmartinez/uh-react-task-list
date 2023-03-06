@@ -1,23 +1,24 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
-
+import InputButton from './components/InputButton/InputButton'
+import TaskList from './components/TaskList/TaskList'
 function App() {
+
+  const [list, setList] = useState([])
+
+  function addTask(title){
+    setList([...list,title])
+  }
+
+  function deleteTask(title){
+     setList(list.filter(t=> t !== title))
+  }
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <InputButton handleAddTask={addTask}></InputButton>
+      <TaskList handleDeleteTask1={deleteTask} tasklist={list}></TaskList>
     </div>
   );
 }
